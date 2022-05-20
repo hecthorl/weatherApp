@@ -14,7 +14,7 @@ export default function getForecast() {
          const data = await res.json().catch(e => console.log(e))
          return data
       },
-      realTime: async (location = 'london') => {
+      realTime: async (location = 'Trujillo') => {
          const res = await fetch(
             `${BASE_URL_API}/current.json?q=${location}`,
             opts

@@ -3,7 +3,8 @@ import { Box } from '@mantine/core'
 import getForecast from 'services/getForecast'
 import Weather from 'components/Weather'
 
-export default function Home({ data = '', ip }) {
+export default function Home({ data = '', ipFound = {}, header = {} }) {
+   console.log(ipFound, header)
    return (
       <>
          <Head>
@@ -17,7 +18,6 @@ export default function Home({ data = '', ip }) {
                placeContent: 'center'
             }}
          >
-            {ip}
             <Box
                sx={{
                   width: 390,
@@ -64,7 +64,13 @@ export default function Home({ data = '', ip }) {
  * @param {import('next').GetServerSidePropsContext} ctx
  */
 export async function getServerSideProps(ctx) {
-   // console.log(ctx.req.socket.remoteAddress)
+   // const ip = ctx.req.headers['x-real-ip'] || ctx.req.connection.remoteAddress
+   const ipFound = {
+      ipSocketRemoteAddres: ctx.req.socket.remoteAddress || 'Nada',
+      ipRealxIP: ctx.req.headers['x-real-ip'] || 'Nada',
+      ipConReqConn: ctx.req.connection.remoteAddress || 'Nada'
+   }
    const data = await getForecast().realTime()
-   return { props: { data, ip: ctx.req.socket.remoteAddress } }
+
+   return { props: { data, ipFound, header: ctx.req.headers } }
 }
