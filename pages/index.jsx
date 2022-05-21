@@ -2,9 +2,10 @@ import Head from 'next/head'
 import { Box } from '@mantine/core'
 import getForecast from 'services/getForecast'
 import Weather from 'components/Weather'
+import getIpClient from 'services/getIpClient'
 
-export default function Home({ data = '', ipFound = {}, header = {} }) {
-   console.log(ipFound, header)
+export default function Home({ data = '', ip }) {
+   console.log(ip)
    return (
       <>
          <Head>
@@ -63,14 +64,10 @@ export default function Home({ data = '', ipFound = {}, header = {} }) {
  *
  * @param {import('next').GetServerSidePropsContext} ctx
  */
-export async function getServerSideProps(ctx) {
-   // const ip = ctx.req.headers['x-real-ip'] || ctx.req.connection.remoteAddress
-   const ipFound = {
-      ipSocketRemoteAddres: ctx.req.socket.remoteAddress || 'Nada',
-      ipRealxIP: ctx.req.headers['x-real-ip'] || 'Nada',
-      ipConReqConn: ctx.req.connection.remoteAddress || 'Nada'
-   }
-   const data = await getForecast().realTime()
+export async function getServerSideProps({ req }) {
+   const publicIp = getIpClient(req)
+   const gelocation = await getForecast().getGeolocation(publicIp)
+   const data = await getForecast().realTime(gelocation)
 
-   return { props: { data, ipFound, header: ctx.req.headers } }
+   return { props: { data, ip: publicIp ?? 'nada' } }
 }

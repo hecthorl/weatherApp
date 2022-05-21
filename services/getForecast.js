@@ -9,17 +9,13 @@ export default function getForecast() {
       }
    }
    return {
-      ipLocation: async (ip = '181.66.142.244') => {
-         const res = await fetch(`${BASE_URL_API}/ip.json?q=${ip}`, opts)
-         const data = await res.json().catch(e => console.log(e))
-         return data
-      },
       realTime: async (location = 'Trujillo') => {
          const res = await fetch(
             `${BASE_URL_API}/current.json?q=${location}`,
             opts
          )
          const data = await res.json().catch(e => console.log(e))
+         console.log(data)
          return {
             shortDesc: data.current.condition.text,
             temp: [data.current.temp_c, data.current.temp_f],
@@ -27,6 +23,12 @@ export default function getForecast() {
                name: data.location.name
             }
          }
+      },
+      getGeolocation: async ip => {
+         if (!ip) throw Error('IP is required')
+         const res = await fetch(`${BASE_URL_API}/ip.json?q=${ip}`, opts)
+         const data = await res.json().catch(e => console.log(e))
+         return data.city
       }
    }
 }
