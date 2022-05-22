@@ -15,13 +15,15 @@ export default function getForecast() {
             opts
          )
          const data = await res.json().catch(e => console.log(e))
-         console.log(data)
+
          return {
             shortDesc: data.current.condition.text,
             temp: [data.current.temp_c, data.current.temp_f],
             location: {
-               name: data.location.name
-            }
+               name: data.location.region
+            },
+            iconNumber: +data.current.condition.icon.match(/\d{3}/g),
+            isDay: data.current.is_day === 1
          }
       },
       getGeolocation: async ip => {
