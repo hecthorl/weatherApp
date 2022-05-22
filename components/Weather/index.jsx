@@ -10,6 +10,7 @@ export default function Weather({
 
    return (
       <Box
+         my="2rem"
          onClick={updateState.toggle}
          sx={{
             flex: 1,
@@ -26,7 +27,6 @@ export default function Weather({
                fontSize: 35,
                color: 'white',
                lineHeight: 1,
-               letterSpacing: 10,
                fontWeight: 500
             }}
             children={location}
