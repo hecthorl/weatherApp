@@ -74,8 +74,15 @@ export default function Home({ data = {} }) {
                         }
                      }}
                   >
-                     <Box sx={{ padding: '33px 13px', width: '100%' }}>
-                        {[...Array(8)].map((_, i) => (
+                     <Box
+                        sx={{
+                           padding: '33px 13px',
+                           width: 'max-content',
+                           display: 'flex',
+                           gap: '1rem'
+                        }}
+                     >
+                        {[...Array(5)].map((_, i) => (
                            <HourCondition key={i} />
                         ))}
                      </Box>
