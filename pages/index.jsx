@@ -4,7 +4,7 @@ import getForecast from 'services/getForecast'
 import getIpClient from 'services/getIpClient'
 import Weather from 'components/Weather'
 import TabBar from 'components/TabBar'
-import HourCondition from 'components/HourCondition'
+import WeatherHour from 'components/WeatherHour'
 
 export default function Home({ data = {} }) {
    const background = data.isDay
@@ -74,18 +74,7 @@ export default function Home({ data = {} }) {
                         }
                      }}
                   >
-                     <Box
-                        sx={{
-                           padding: '33px 13px',
-                           width: 'max-content',
-                           display: 'flex',
-                           gap: '1rem'
-                        }}
-                     >
-                        {[...Array(5)].map((_, i) => (
-                           <HourCondition key={i} />
-                        ))}
-                     </Box>
+                     <WeatherHour />
                      <Box
                         sx={{
                            position: 'absolute',
