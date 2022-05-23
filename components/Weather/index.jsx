@@ -2,9 +2,9 @@ import { Box, Text } from '@mantine/core'
 import useBoolean from 'hooks/useBoolean'
 
 export default function Weather({
-   location = 'x',
+   location = '',
    temperature = [],
-   weatherDesc = 'x'
+   weatherDesc = ''
 }) {
    const [state, updateState] = useBoolean()
 
@@ -17,7 +17,9 @@ export default function Weather({
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            cursor: 'default',
+            userSelect: 'none'
          }}
       >
          <Text
