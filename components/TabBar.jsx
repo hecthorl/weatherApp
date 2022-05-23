@@ -4,7 +4,7 @@ import MapIcon from './MapIcon'
 import PlusIcon from './PlusIcon'
 import Shape from './Shape'
 
-export default function TabBar() {
+export default function TabBar({ onClick }) {
    return (
       <Box
          sx={{
@@ -52,7 +52,7 @@ export default function TabBar() {
                      placeContent: 'center'
                   }}
                />
-               <Box children={<ListIcon />} />
+               <Box onClick={onClick} children={<ListIcon />} />
             </Box>
          </Box>
       </Box>
