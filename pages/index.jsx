@@ -36,7 +36,7 @@ export default function Home({ data = {} }) {
                   position: 'relative'
                }}
             >
-               <AnimatePresence>
+               <AnimatePresence initial={false}>
                   {isThere ? (
                      <HeroComponent data={data} onClick={upDateState.toggle} />
                   ) : (

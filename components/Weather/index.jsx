@@ -38,7 +38,8 @@ export default function Weather({
                height: 96,
                width: 248,
                position: 'relative',
-               overflow: 'hidden'
+               overflow: 'hidden',
+               zIndex: 10
             }}
          >
             <Box

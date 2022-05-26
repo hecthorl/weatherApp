@@ -1,17 +1,21 @@
+/* eslint-disable react/display-name */
+import { forwardRef } from 'react'
 import { Box } from '@mantine/core'
 import ListIcon from './ListIcon'
 import MapIcon from './MapIcon'
 import PlusIcon from './PlusIcon'
 import Shape from './Shape'
 
-export default function TabBar({ onClick }) {
+const TabBar = forwardRef(({ onClick }, ref) => {
    return (
       <Box
+         ref={ref}
          sx={{
             position: 'absolute',
             bottom: 0,
             width: '100%',
-            height: 100
+            height: 100,
+            zIndex: 30
          }}
       >
          <Box
@@ -39,6 +43,7 @@ export default function TabBar({ onClick }) {
                   children={<MapIcon />}
                />
                <Box
+                  role="button"
                   children={<PlusIcon />}
                   sx={{
                      width: 64,
@@ -57,4 +62,6 @@ export default function TabBar({ onClick }) {
          </Box>
       </Box>
    )
-}
+})
+
+export default TabBar

@@ -1,9 +1,18 @@
-import { MantineProvider } from '@mantine/core'
+import { Global, MantineProvider } from '@mantine/core'
 
 export default function WeatherApp({ Component, pageProps }) {
    return (
       <MantineProvider withGlobalStyles withNormalizeCSS>
-         <Component {...pageProps} />
+         <>
+            <Global
+               styles={{
+                  '*, *::before, *::after': {
+                     userSelect: 'none'
+                  }
+               }}
+            />
+            <Component {...pageProps} />
+         </>
       </MantineProvider>
    )
 }

@@ -23,7 +23,7 @@ export default function WeatherHour() {
             component={motion.div}
             drag="x"
             sx={{
-               padding: '33px 13px 0',
+               padding: '0 13px',
                width: 'max-content',
                display: 'flex',
                gap: '1rem'
