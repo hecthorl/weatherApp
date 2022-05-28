@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Box, Input, Text } from '@mantine/core'
+import { Box, ColorPicker, Slider, Text } from '@mantine/core'
 import { motion, useAnimation } from 'framer-motion'
 // import { si } from 'utils/constants'
 
@@ -8,7 +8,7 @@ export default function T() {
    const [size, setSize] = useState(64)
    const [boo, setBoo] = useState(false)
    const [borderSize, setBorderSize] = useState(6)
-   const [borderColor, setBorderColor] = useState('white')
+   const [borderColor, setBorderColor] = useState('rgb(255 255 255 / 100%)')
    useEffect(() => {
       /**
        * @type {Element}
@@ -40,39 +40,39 @@ export default function T() {
          >
             <Box>
                <Text color="teal">SIZE: {size}px</Text>
-               <Input
+               <Slider
                   step={10}
                   min={1}
                   max={500}
                   value={size}
-                  onChange={e => setSize(e.target.value)}
+                  onChange={setSize}
                   type="range"
                />
             </Box>
             <Box>
                <Text color="teal">BorderSize: {borderSize}px</Text>
-               <Input
+               <Slider
                   step={5}
                   min={1}
                   max={60}
                   value={borderSize}
-                  onChange={e => setBorderSize(e.target.value)}
+                  onChange={setBorderSize}
                   type="range"
                />
             </Box>
             <Box>
                <Text color="teal">Hex: {borderColor}</Text>
-               <Input
-                  type="color"
+               <ColorPicker
+                  format="rgba"
                   value={borderColor}
-                  onChange={e => setBorderColor(e.target.value)}
+                  onChange={setBorderColor}
                />
             </Box>
             <Box>
                <Box
                   sx={{
                      width: 500,
-                     height: 500,
+                     height: 400,
                      border: '5px solid red',
                      position: 'relative'
                   }}

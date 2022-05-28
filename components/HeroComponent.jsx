@@ -1,16 +1,21 @@
 // import { useRef } from 'react'
 import { Box } from '@mantine/core'
 import { motion } from 'framer-motion'
+import { BsFillSunFill } from 'react-icons/bs'
 import WeatherDetails from './WeatherDetails'
 import TabBar from './TabBar'
 import Weather from './Weather'
 import WeatherHour from './WeatherHour'
+import PlusBtn from './PlusBtn'
+import ListBtn from './ListBtn'
+import WeatherDetail from './WeatherDetail'
+import { useRouter } from 'next/router'
+import LocalTime from './Localtime'
 
-export default function HeroComponent({ data, onClick }) {
-   // const constrainsRef = useRef(null)
+export default function HeroComponent({ data, searchCb }) {
+   const { query } = useRouter()
    return (
       <Box
-         // ref={constrainsRef}
          sx={{ height: 'inherit' }}
          component={motion.div}
          initial={{ x: 390 }}
@@ -19,8 +24,58 @@ export default function HeroComponent({ data, onClick }) {
       >
          <WeatherDetails>
             <WeatherHour />
+            <Box
+               mx={10}
+               sx={{
+                  opacity: query?.isTab ? 1 : 0,
+                  transition: 'opacity 0.3s ease',
+                  height: '100%'
+               }}
+            >
+               <WeatherDetail>
+                  <LocalTime />
+               </WeatherDetail>
+               <Box
+                  sx={{
+                     display: 'grid',
+                     gridTemplate: 'repeat(4, 1fr) / 1fr 1fr',
+                     height: '100%',
+                     gap: 10,
+                     marginTop: 10
+                  }}
+               >
+                  <WeatherDetail>
+                     <Box
+                        sx={{
+                           color: 'rgb(255 255 255 / 70%)',
+                           display: 'flex',
+                           alignItems: 'center',
+                           gap: 5
+                        }}
+                     >
+                        <BsFillSunFill fontSize="1.5rem" />
+                        <Box>UV INDEX</Box>
+                     </Box>
+                     <Box
+                        my={15}
+                        sx={{ fontSize: '3rem', lineHeight: 1, color: 'white' }}
+                     >
+                        4
+                     </Box>
+                     <Box
+                        sx={{ color: 'white', fontSize: '2rem', lineHeight: 1 }}
+                     >
+                        Moderate
+                     </Box>
+                  </WeatherDetail>
+                  <WeatherDetail>xd</WeatherDetail>
+               </Box>
+            </Box>
          </WeatherDetails>
-         <TabBar onClick={onClick} />
+         <TabBar>
+            <PlusBtn />
+            <ListBtn onClick={searchCb} />
+         </TabBar>
          <Box
             sx={{
                userSelect: 'none',

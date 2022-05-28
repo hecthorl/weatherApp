@@ -35,7 +35,6 @@ export default function DragArea({ dragControls }) {
          }}
       >
          <Box
-            id="xd"
             sx={{
                height: 5,
                marginTop: 5,

@@ -38,7 +38,7 @@ export default function Home({ data = {} }) {
             >
                <AnimatePresence initial={false}>
                   {isThere ? (
-                     <HeroComponent data={data} onClick={upDateState.toggle} />
+                     <HeroComponent data={data} searchCb={upDateState.toggle} />
                   ) : (
                      <SearchView onClick={upDateState.toggle} />
                   )}

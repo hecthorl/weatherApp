@@ -1,18 +1,17 @@
-/* eslint-disable react/display-name */
-import { forwardRef } from 'react'
 import { Box } from '@mantine/core'
-import ListIcon from './ListIcon'
+import { useRouter } from 'next/router'
 import MapIcon from './MapIcon'
-import PlusIcon from './PlusIcon'
 import Shape from './Shape'
 
-const TabBar = forwardRef(({ onClick }, ref) => {
+export default function TabBar({ children }) {
+   const { query } = useRouter()
+
    return (
       <Box
-         ref={ref}
          sx={{
+            transition: 'bottom 0.2s ease',
             position: 'absolute',
-            bottom: 0,
+            bottom: query?.isTab ? -110 : 0,
             width: '100%',
             height: 100,
             zIndex: 30
@@ -42,26 +41,9 @@ const TabBar = forwardRef(({ onClick }, ref) => {
                   sx={{ opacity: 0, userSelect: 'none' }}
                   children={<MapIcon />}
                />
-               <Box
-                  role="button"
-                  children={<PlusIcon />}
-                  sx={{
-                     width: 64,
-                     height: 64,
-                     background:
-                        'linear-gradient(156deg, rgba(245,245,249,1) 0%, rgba(218,223,231,1) 100%)',
-                     borderRadius: 9999999,
-                     boxShadow:
-                        '6.01px 6.01px 26px #15182c, -6.01px -6.01px 26px #747db9',
-                     display: 'grid',
-                     placeContent: 'center'
-                  }}
-               />
-               <Box onClick={onClick} children={<ListIcon />} />
+               {children}
             </Box>
          </Box>
       </Box>
    )
-})
-
-export default TabBar
+}
