@@ -2,9 +2,9 @@
 const nextConfig = {
    reactStrictMode: true,
    eslint: {
-      ignoreDuringBuilds: true,
+      ignoreDuringBuilds: true
    },
-   swcMinify: true,
+   swcMinify: true
 }
 
 module.exports = nextConfig
