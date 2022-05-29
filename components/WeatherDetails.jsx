@@ -48,7 +48,7 @@ export default function WeatherDetails({ children }) {
             sx={{
                width: '100%',
                height: '100%',
-               overflowY: 'scroll',
+               overflowY: query?.isTab ? 'scroll' : 'hidden',
                '::-webkit-scrollbar': {
                   display: 'none'
                }

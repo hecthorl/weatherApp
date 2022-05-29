@@ -7,6 +7,7 @@ import {
    BsWind,
    BsFillEyeFill
 } from 'react-icons/bs'
+import { GiDirectionSign } from 'react-icons/gi'
 import { WiHumidity } from 'react-icons/wi'
 import WeatherDetails from './WeatherDetails'
 import TabBar from './TabBar'
@@ -92,7 +93,7 @@ export default function HeroComponent({ data, searchCb }) {
                   </WeatherDetail>
                   <WeatherDetail>
                      <BoxCondition
-                        Icon={BsFillEyeFill}
+                        Icon={GiDirectionSign}
                         name="WIND DIR"
                         imgSrc="windsock"
                         data={data.wind.direction}
