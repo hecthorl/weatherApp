@@ -3,11 +3,12 @@ import useBoolean from 'hooks/useBoolean'
 
 export default function Weather({
    location = '',
-   temperature = [],
+   temperature = {},
    weatherDesc = ''
 }) {
    const [state, updateState] = useBoolean()
-
+   const hi = temperature.max[state ? 1 : 0]
+   const low = temperature.min[state ? 1 : 0]
    return (
       <Box
          my="2rem"
@@ -52,8 +53,8 @@ export default function Weather({
                   transition: 'bottom .2s ease'
                }}
             >
-               <Temperature children={`${temperature[0]}°C`} />
-               <Temperature children={`${temperature[1]}°F`} />
+               <Temperature children={`${temperature.average[0]}°C`} />
+               <Temperature children={`${temperature.average[1]}°F`} />
             </Box>
          </Box>
          <Text
@@ -85,8 +86,8 @@ export default function Weather({
                maxWidth: 160
             }}
          >
-            <Text component="span">H:24°</Text>
-            <Text component="span">L:18°</Text>
+            <Text component="span">H:{hi}°</Text>
+            <Text component="span">L:{low}°</Text>
          </Box>
       </Box>
    )

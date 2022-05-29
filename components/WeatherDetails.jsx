@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Box } from '@mantine/core'
 import { motion, useDragControls } from 'framer-motion'
 import DragArea from './DragArea'
 import { useRouter } from 'next/router'
 
 export default function WeatherDetails({ children }) {
+   const boxRef = useRef(null)
    const dragControls = useDragControls()
    const { push, query } = useRouter()
    const [isUp, setIsUp] = useState(true)
@@ -14,6 +15,10 @@ export default function WeatherDetails({ children }) {
       setIsUp(valY)
       const toStr = valY ? '/' : '/?isTab=true'
       push(toStr, '/', { shallow: true })
+
+      if (boxRef.current) {
+         boxRef.current.scrollTop = 0
+      }
    }
 
    return (
@@ -39,9 +44,14 @@ export default function WeatherDetails({ children }) {
          }}
       >
          <Box
+            ref={boxRef}
             sx={{
                width: '100%',
-               height: '100%'
+               height: '100%',
+               overflowY: 'scroll',
+               '::-webkit-scrollbar': {
+                  display: 'none'
+               }
             }}
          >
             <DragArea dragControls={dragControls} />

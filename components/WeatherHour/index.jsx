@@ -7,15 +7,14 @@ export default function WeatherHour() {
    const constraintsRef = useRef(null)
    return (
       <Box
-         id="xd"
+         pb={10}
          ref={constraintsRef}
          sx={{
             maxWidth: '100%',
             position: 'relative',
             overflowX: 'scroll',
-            zIndex: 6666,
             '&::-webkit-scrollbar': {
-               width: 1
+               display: 'none'
             }
          }}
       >

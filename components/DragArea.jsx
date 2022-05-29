@@ -9,7 +9,9 @@ export default function DragArea({ dragControls }) {
             height: 20,
             display: 'flex',
             placeContent: 'center',
-            position: 'relative',
+            position: 'sticky',
+            top: 0,
+            zIndex: 40,
             borderBottom: '1px solid rgb(255 255 255 / 10%)',
             margin: '0 0 10px  0',
             ':after': {

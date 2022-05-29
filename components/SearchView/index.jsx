@@ -34,7 +34,7 @@ export default function SearchView({ onClick }) {
                   onClick={onClick}
                   children="Weather"
                />
-               <Button></Button>
+               <Button sx={{ visibility: 'hidden' }}></Button>
             </Box>
             <Box>
                <Input />

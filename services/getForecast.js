@@ -9,28 +9,41 @@ export default function getForecast() {
       }
    }
    return {
-      realTime: async (location = 'Trujillo') => {
+      forecast: async (location = 'Trujillo') => {
          const res = await fetch(
-            `${BASE_URL_API}/current.json?q=${location}`,
+            `${BASE_URL_API}/forecast.json?q=${location}`,
             opts
          )
-         const data = await res.json().catch(e => console.log(e))
+         const {
+            forecast,
+            current,
+            location: locationApi
+         } = await res.json().catch(e => console.log(e))
+
+         const forecastDay = forecast.forecastday[0]
 
          return {
-            shortDesc: data.current.condition.text,
-            temp: [data.current.temp_c, data.current.temp_f],
-            location: {
-               name: data.location.region
+            shortDesc: forecastDay.day.condition.text,
+            temp: {
+               average: [forecastDay.day.avgtemp_c, forecastDay.day.avgtemp_f],
+               min: [forecastDay.day.mintemp_c, forecastDay.day.mintemp_f],
+               max: [forecastDay.day.maxtemp_c, forecastDay.day.maxtemp_f]
             },
-            iconNumber: +data.current.condition.icon.match(/\d{3}/g),
-            isDay: data.current.is_day === 1
+            location: {
+               name: locationApi.region
+            },
+            iconNumber: +forecastDay.day.condition.icon.match(/\d{3}/g),
+            isDay: current.is_day === 1,
+            currentDate: locationApi.localtime_epoch,
+            uv: forecastDay.day.uv,
+            humidity: forecastDay.day.avghumidity,
+            wind: {
+               velocity: forecastDay.day.maxwind_kph,
+               direction: current.wind_dir
+            },
+            feelsLikeC: current.feelslike_c,
+            visivility: forecastDay.day.avgvis_km
          }
-      },
-      getGeolocation: async ip => {
-         if (!ip) throw Error('IP is required')
-         const res = await fetch(`${BASE_URL_API}/ip.json?q=${ip}`, opts)
-         const data = await res.json().catch(e => console.log(e))
-         return data.city
       }
    }
 }

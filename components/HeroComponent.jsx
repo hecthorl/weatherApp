@@ -1,7 +1,13 @@
-// import { useRef } from 'react'
+import { useRouter } from 'next/router'
 import { Box } from '@mantine/core'
 import { motion } from 'framer-motion'
-import { BsFillSunFill } from 'react-icons/bs'
+import {
+   BsFillSunFill,
+   BsThermometerHigh,
+   BsWind,
+   BsFillEyeFill
+} from 'react-icons/bs'
+import { WiHumidity } from 'react-icons/wi'
 import WeatherDetails from './WeatherDetails'
 import TabBar from './TabBar'
 import Weather from './Weather'
@@ -9,11 +15,12 @@ import WeatherHour from './WeatherHour'
 import PlusBtn from './PlusBtn'
 import ListBtn from './ListBtn'
 import WeatherDetail from './WeatherDetail'
-import { useRouter } from 'next/router'
 import LocalTime from './Localtime'
+import BoxCondition from './BoxCondition'
 
 export default function HeroComponent({ data, searchCb }) {
    const { query } = useRouter()
+
    return (
       <Box
          sx={{ height: 'inherit' }}
@@ -33,42 +40,64 @@ export default function HeroComponent({ data, searchCb }) {
                }}
             >
                <WeatherDetail>
-                  <LocalTime />
+                  <LocalTime time={data.currentDate} />
                </WeatherDetail>
                <Box
                   sx={{
                      display: 'grid',
-                     gridTemplate: 'repeat(4, 1fr) / 1fr 1fr',
-                     height: '100%',
+                     gridTemplate: 'repeat(3, 180px) / 1fr 1fr',
+                     height: 'fit-content',
                      gap: 10,
                      marginTop: 10
                   }}
                >
                   <WeatherDetail>
-                     <Box
-                        sx={{
-                           color: 'rgb(255 255 255 / 70%)',
-                           display: 'flex',
-                           alignItems: 'center',
-                           gap: 5
-                        }}
-                     >
-                        <BsFillSunFill fontSize="1.5rem" />
-                        <Box>UV INDEX</Box>
-                     </Box>
-                     <Box
-                        my={15}
-                        sx={{ fontSize: '3rem', lineHeight: 1, color: 'white' }}
-                     >
-                        4
-                     </Box>
-                     <Box
-                        sx={{ color: 'white', fontSize: '2rem', lineHeight: 1 }}
-                     >
-                        Moderate
-                     </Box>
+                     <BoxCondition
+                        Icon={BsFillSunFill}
+                        name="UV INDEX"
+                        imgSrc="uv-index"
+                        data={data.uv}
+                     />
                   </WeatherDetail>
-                  <WeatherDetail>xd</WeatherDetail>
+                  <WeatherDetail>
+                     <BoxCondition
+                        Icon={WiHumidity}
+                        name="HUMIDITY"
+                        imgSrc="humidity"
+                        data={data.humidity}
+                     />
+                  </WeatherDetail>
+                  <WeatherDetail>
+                     <BoxCondition
+                        Icon={BsThermometerHigh}
+                        name="FEELS LIKE"
+                        imgSrc="thermometer"
+                        data={`${data.feelsLikeC}°`}
+                     />
+                  </WeatherDetail>
+                  <WeatherDetail>
+                     <BoxCondition
+                        Icon={BsWind}
+                        name="WIND KM/H"
+                        imgSrc="wind"
+                        data={Math.floor(data.wind.velocity)}
+                     />
+                  </WeatherDetail>
+                  <WeatherDetail>
+                     <BoxCondition
+                        Icon={BsFillEyeFill}
+                        name="VISIVILITY"
+                        data={data.visivility + 'km'}
+                     />
+                  </WeatherDetail>
+                  <WeatherDetail>
+                     <BoxCondition
+                        Icon={BsFillEyeFill}
+                        name="WIND DIR"
+                        imgSrc="windsock"
+                        data={data.wind.direction}
+                     />
+                  </WeatherDetail>
                </Box>
             </Box>
          </WeatherDetails>

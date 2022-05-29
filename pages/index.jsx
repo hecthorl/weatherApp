@@ -55,7 +55,7 @@ export default function Home({ data = {} }) {
  */
 export async function getServerSideProps(ctx) {
    const publicIp = getIpClient(ctx.req)
-   const data = await getForecast().realTime(publicIp)
+   const data = await getForecast().forecast(publicIp)
 
    return { props: { data } }
 }
