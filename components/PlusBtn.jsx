@@ -3,8 +3,7 @@ import { useRouter } from 'next/router'
 import PlusIcon from './PlusIcon'
 
 export default function PlusBtn() {
-   const { push, query } = useRouter()
-   // console.log(typeof query?.isTab)
+   const { push } = useRouter()
    return (
       <Box
          onClick={() => {

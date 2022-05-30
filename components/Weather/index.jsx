@@ -62,7 +62,7 @@ export default function Weather({
             m={0}
             component="p"
             sx={{
-               fontSize: '25px',
+               fontSize: 25,
                color: 'silver',
                lineHeight: 1.3,
                fontWeight: 500,
@@ -77,7 +77,7 @@ export default function Weather({
             m={0}
             component="p"
             sx={{
-               fontSize: '20px',
+               fontSize: 25,
                color: 'white',
                lineHeight: 1,
                display: 'inline-flex',

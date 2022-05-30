@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Box, ColorPicker, Slider, Text } from '@mantine/core'
-import { motion, useAnimation } from 'framer-motion'
-// import { si } from 'utils/constants'
+import { motion } from 'framer-motion'
+import { si } from 'utils/constants'
 
 export default function T() {
    const ccRef = useRef(null)
@@ -76,22 +76,7 @@ export default function T() {
                      border: '5px solid red',
                      position: 'relative'
                   }}
-                  // component={motion.div}
                >
-                  {/* <Box
-                     component={motion.div}
-                     sx={{
-                        width: 100,
-                        height: 100,
-                        background: 'blue'
-                        // transition: 'transform 0.2s ease'
-                     }}
-                     drag="x"
-                     onDrag={onPan}
-                     onDragEnd={onPanEnd}
-                     dragConstraints={{ left: 0, right: 390 }}
-                     animate={animationControl}
-                  /> */}
                   <Box
                      component={motion.div}
                      drag="y"
@@ -120,11 +105,19 @@ export default function T() {
                overflow: 'hidden'
             }}
          >
-            <YoutubeSpinner
+            {/* <YoutubeSpinner
                borderColor={borderColor}
                size={size}
                borderWidth={borderSize}
-            />
+            /> */}
+            {si.map(item => {
+               return (
+                  <Box sx={{ textAlign: 'center' }} key={item}>
+                     <Box component="img" src={`/transpilar/night/${item}`} />
+                     {item.replace('.png', '')}
+                  </Box>
+               )
+            })}
          </Box>
       </Box>
    )

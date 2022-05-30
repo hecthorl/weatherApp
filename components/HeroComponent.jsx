@@ -18,6 +18,7 @@ import ListBtn from './ListBtn'
 import WeatherDetail from './WeatherDetail'
 import LocalTime from './Localtime'
 import BoxCondition from './BoxCondition'
+import HourCondition from './HourCondition'
 
 export default function HeroComponent({ data, searchCb }) {
    const { query } = useRouter()
@@ -31,7 +32,19 @@ export default function HeroComponent({ data, searchCb }) {
          exit={{ x: 390 }}
       >
          <WeatherDetails>
-            <WeatherHour />
+            <WeatherHour
+               children={data.forecastHour.map(
+                  ({ temp, imgCode, hour, isDay }, i) => (
+                     <HourCondition
+                        key={i}
+                        time={hour}
+                        imgCode={imgCode}
+                        temp={temp}
+                        isDay={isDay}
+                     />
+                  )
+               )}
+            />
             <Box
                mx={10}
                sx={{
@@ -73,7 +86,7 @@ export default function HeroComponent({ data, searchCb }) {
                         Icon={BsThermometerHigh}
                         name="FEELS LIKE"
                         imgSrc="thermometer"
-                        data={`${data.feelsLikeC}°`}
+                        data={`${Math.floor(data.feelsLikeC)}°`}
                      />
                   </WeatherDetail>
                   <WeatherDetail>
@@ -129,7 +142,9 @@ export default function HeroComponent({ data, searchCb }) {
                      boxShadow: 'inset 0 0 9px #ffffff3b'
                   }}
                   component="img"
-                  src={`/wi/${data.iconNumber}.svg`}
+                  src={`/wi/${data.isDay ? 'day' : 'night'}/${
+                     data.iconNumber
+                  }.svg`}
                />
             </Box>
          </Box>

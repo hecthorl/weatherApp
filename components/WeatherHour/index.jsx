@@ -1,9 +1,8 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Box } from '@mantine/core'
-import HourCondition from 'components/HourCondition'
 
-export default function WeatherHour() {
+export default function WeatherHour({ children }) {
    const constraintsRef = useRef(null)
    return (
       <Box
@@ -29,9 +28,7 @@ export default function WeatherHour() {
                gap: '1rem'
             }}
          >
-            {[...Array(15)].map((_, i) => (
-               <HourCondition key={i} />
-            ))}
+            {children}
          </Box>
       </Box>
    )

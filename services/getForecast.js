@@ -42,7 +42,13 @@ export default function getForecast() {
                direction: current.wind_dir
             },
             feelsLikeC: current.feelslike_c,
-            visivility: forecastDay.day.avgvis_km
+            visivility: forecastDay.day.avgvis_km,
+            forecastHour: forecastDay.hour.map(item => ({
+               temp: item.temp_c,
+               hour: item.time_epoch * 1000,
+               imgCode: +item.condition.icon.match(/\d{3}/g),
+               isDay: item.is_day === 1
+            }))
          }
       }
    }

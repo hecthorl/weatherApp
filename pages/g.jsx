@@ -20,7 +20,7 @@ export default function G() {
                   }}
                   key={item}
                >
-                  <Box component="img" src={`/wi/${item}`} />
+                  <Box component="img" src={`/wi/day/${item}`} />
                   {item.replace('.svg', '')}
                </Box>
             )

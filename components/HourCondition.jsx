@@ -1,6 +1,11 @@
 import { Box } from '@mantine/core'
 
-export default function HourCondition() {
+export default function HourCondition({ imgCode, time, temp, isDay }) {
+   const hour = new Intl.DateTimeFormat('en', {
+      hour12: true,
+      hour: '2-digit'
+   }).format(time)
+
    return (
       <Box
          sx={{
@@ -18,10 +23,10 @@ export default function HourCondition() {
             userSelect: 'none'
          }}
       >
-         <Box component="time" children="12 AM" />
+         <Box component="time" children={hour} />
          <Box
             sx={{
-               background: 'url(/wi/179.svg)',
+               background: `url(/wi/${isDay ? 'day' : 'night'}/${imgCode}.svg)`,
                width: '100%',
                height: 64,
                backgroundRepeat: 'no-repeat'
@@ -30,7 +35,7 @@ export default function HourCondition() {
          <Box
             sx={{ lineHeight: 1, fontSize: '1.2rem' }}
             component="time"
-            children="19°"
+            children={`${temp}°`}
          />
       </Box>
    )

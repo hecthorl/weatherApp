@@ -26,7 +26,7 @@ export default function BoxCondition({ Icon, name, imgSrc, data }) {
             <Box
                sx={{
                   flex: 1,
-                  fontSize: '3rem',
+                  fontSize: '2.5rem',
                   color: 'white',
                   lineHeight: 1
                }}
