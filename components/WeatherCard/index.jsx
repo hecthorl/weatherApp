@@ -1,6 +1,13 @@
 import { Box, Text } from '@mantine/core'
 
-export default function WeatherCard() {
+export default function WeatherCard({
+   isDay,
+   temp,
+   location,
+   shortDesc,
+   icon
+}) {
+   const locationName = `${location.country}, ${location.name || location.city}`
    return (
       <Box
          id="card"
@@ -33,11 +40,11 @@ export default function WeatherCard() {
             }}
          >
             <Text
-               children="19°"
+               children={temp.average[0] + '°'}
                sx={{ fontSize: '5rem', lineHeight: 1, marginBottom: '1rem' }}
             />
             <Text
-               children="H25° L18°"
+               children={`H:${temp.max[0]}° L:${temp.min[0]}°`}
                sx={{
                   alignSelf: 'flex-start',
                   paddingLeft: '1.46rem',
@@ -45,7 +52,7 @@ export default function WeatherCard() {
                   color: '#ffffff78'
                }}
             />
-            <Text children="Montreal Canada" sx={{ lineHeight: 1 }} />
+            <Text children={locationName} sx={{ lineHeight: 1 }} />
          </Box>
          <Box
             sx={{
@@ -68,10 +75,13 @@ export default function WeatherCard() {
                <Box
                   sx={{ position: 'absolute', top: -42, left: 0 }}
                   component="img"
-                  src="/wi/200.svg"
+                  src={`/wi/${isDay ? 'day' : 'night'}/${icon}.svg`}
                />
             </Box>
-            <Box sx={{ textAlign: 'end', width: '70%' }} children="Rain" />
+            <Box
+               sx={{ textAlign: 'end', width: '70%', whiteSpace: 'nowrap' }}
+               children={shortDesc}
+            />
          </Box>
       </Box>
    )

@@ -1,6 +1,17 @@
 export const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API
 export const RAPID_API_KEY = process.env.NEXT_PUBLIC_RAPID_API_KEY
 
+export const CITIES = [
+   'new york',
+   'madrid',
+   'osaka',
+   'london',
+   'delhi',
+   'buenos aires',
+   'helsinki',
+   'wellington'
+]
+
 export const currentIcons = [
    'barometer.svg',
    'celsius.svg',

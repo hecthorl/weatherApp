@@ -23,16 +23,18 @@ export default function getForecast() {
          const forecastDay = forecast.forecastday[0]
 
          return {
-            shortDesc: forecastDay.day.condition.text,
+            shortDesc: current.condition.text,
             temp: {
                average: [forecastDay.day.avgtemp_c, forecastDay.day.avgtemp_f],
                min: [forecastDay.day.mintemp_c, forecastDay.day.mintemp_f],
                max: [forecastDay.day.maxtemp_c, forecastDay.day.maxtemp_f]
             },
             location: {
-               name: locationApi.region
+               name: locationApi.region,
+               country: locationApi.country,
+               city: locationApi.name
             },
-            iconNumber: +forecastDay.day.condition.icon.match(/\d{3}/g),
+            iconNumber: +current.condition.icon.match(/\d{3}/g),
             isDay: current.is_day === 1,
             currentDate: locationApi.localtime_epoch,
             uv: forecastDay.day.uv,

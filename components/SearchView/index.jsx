@@ -1,10 +1,22 @@
+import { useEffect, useState } from 'react'
 import { Box, Button } from '@mantine/core'
-import Input from 'components/Input'
 import { motion } from 'framer-motion'
+import Input from 'components/Input'
 import LeftChevron from 'components/LeftChevron'
 import WeatherCard from 'components/WeatherCard'
+import { CITIES } from 'utils/constants'
+import getForecast from 'services/getForecast'
 
 export default function SearchView({ onClick }) {
+   const [data, setData] = useState([])
+   useEffect(() => {
+      Promise.all(
+         CITIES.map(async country => await getForecast().forecast(country))
+      ).then(data => {
+         setData(data)
+         console.log(data)
+      })
+   }, [])
    return (
       <Box
          component={motion.div}
@@ -34,11 +46,9 @@ export default function SearchView({ onClick }) {
                   onClick={onClick}
                   children="Weather"
                />
-               <Button sx={{ visibility: 'hidden' }}></Button>
+               <Button sx={{ visibility: 'hidden' }} />
             </Box>
-            <Box>
-               <Input />
-            </Box>
+            <Input />
          </Box>
          <Box
             sx={{
@@ -59,9 +69,22 @@ export default function SearchView({ onClick }) {
                   gap: '1.5rem'
                }}
             >
-               {[...Array(15)].map((_, i) => (
-                  <WeatherCard key={i} />
-               ))}
+               {!data.length
+                  ? 'Cargando...'
+                  : data.map((item, i) => {
+                       const { temp, shortDesc, location, isDay, iconNumber } =
+                          item
+                       return (
+                          <WeatherCard
+                             isDay={isDay}
+                             temp={temp}
+                             location={location}
+                             shortDesc={shortDesc}
+                             key={i}
+                             icon={iconNumber}
+                          />
+                       )
+                    })}
             </Box>
          </Box>
       </Box>
