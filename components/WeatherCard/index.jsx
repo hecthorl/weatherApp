@@ -5,12 +5,13 @@ export default function WeatherCard({
    temp,
    location,
    shortDesc,
-   icon
+   icon,
+   onClick
 }) {
    const locationName = `${location.country}, ${location.name || location.city}`
    return (
       <Box
-         id="card"
+         onClick={onClick}
          sx={{
             width: 342,
             height: 175,

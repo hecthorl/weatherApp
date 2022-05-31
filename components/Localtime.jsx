@@ -2,16 +2,17 @@ import { Box } from '@mantine/core'
 import { AiOutlineFieldTime } from 'react-icons/ai'
 
 export default function LocalTime({ time }) {
+   const realLocal = new Date(time).getTime()
    const hourNminute = new Intl.DateTimeFormat('en', {
       hour12: true,
       hour: '2-digit',
       minute: '2-digit'
-   }).format(time * 1000)
+   }).format(realLocal)
    const completeDate = new Intl.DateTimeFormat('en', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
-   }).format(time * 1000)
+   }).format(realLocal)
 
    return (
       <Box sx={{ display: 'flex', height: '100%' }}>
@@ -27,9 +28,10 @@ export default function LocalTime({ time }) {
                <AiOutlineFieldTime fontSize="1.5rem" />
                <Box sx={{ whiteSpace: 'nowrap' }}>Local Time</Box>
             </Box>
-            <Box sx={{ color: 'white', fontSize: '1.2rem', marginTop: 13 }}>
-               {completeDate}
-            </Box>
+            <Box
+               sx={{ color: 'white', fontSize: '1.2rem', marginTop: 13 }}
+               children={completeDate}
+            />
          </Box>
          <Box
             sx={{

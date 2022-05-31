@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import { Box } from '@mantine/core'
 import getForecast from 'services/getForecast'
 import getIpClient from 'services/getIpClient'
@@ -8,10 +9,12 @@ import SearchView from 'components/SearchView'
 import useBoolean from 'hooks/useBoolean'
 
 export default function Home({ data = {} }) {
-   const background = data.isDay
+   const [currentData, setCurrentData] = useState(data)
+   const background = currentData.isDay
       ? 'linear-gradient(226deg, #5181ff, #c159ec)'
       : 'url(/sky_noc.png)'
    const [isThere, upDateState] = useBoolean(true)
+
    return (
       <>
          <Head>
@@ -38,9 +41,15 @@ export default function Home({ data = {} }) {
             >
                <AnimatePresence initial={false}>
                   {isThere ? (
-                     <HeroComponent data={data} searchCb={upDateState.toggle} />
+                     <HeroComponent
+                        data={currentData}
+                        searchCb={upDateState.toggle}
+                     />
                   ) : (
-                     <SearchView onClick={upDateState.toggle} />
+                     <SearchView
+                        setCurrentData={setCurrentData}
+                        onClick={upDateState.toggle}
+                     />
                   )}
                </AnimatePresence>
             </Box>

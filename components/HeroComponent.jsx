@@ -128,7 +128,7 @@ export default function HeroComponent({ data, searchCb }) {
             }}
          >
             <Weather
-               location={data.location.name}
+               location={data.location.city}
                weatherDesc={data.shortDesc}
                temperature={data.temp}
             />

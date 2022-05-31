@@ -36,7 +36,7 @@ export default function getForecast() {
             },
             iconNumber: +current.condition.icon.match(/\d{3}/g),
             isDay: current.is_day === 1,
-            currentDate: locationApi.localtime_epoch,
+            currentDate: locationApi.localtime,
             uv: forecastDay.day.uv,
             humidity: forecastDay.day.avghumidity,
             wind: {
